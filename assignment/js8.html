@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+        text-align: center;
+      }
+      form {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 40%;
+        margin: auto;
+        box-shadow: 0px 0px 10px gray;
+      }
+      input,
+      select,
+      textarea {
+        width: 90%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+      .submit-btn {
+        background-color: red;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    </style>
+    <script>
+      function validateForm() {
+        let valid = true;
+
+        let firstName = document.getElementById("firstName");
+        let lastName = document.getElementById("lastName");
+        let email = document.getElementById("email");
+        let password = document.getElementById("password");
+        let confirmPassword = document.getElementById("confirmPassword");
+        let phone = document.getElementById("phone");
+        let address = document.getElementById("address");
+        let country = document.getElementById("country");
+
+        let firstNameError = document.getElementById("firstNameError");
+        let lastNameError = document.getElementById("lastNameError");
+        let emailError = document.getElementById("emailError");
+        let passwordError = document.getElementById("passwordError");
+        let confirmPasswordError = document.getElementById(
+          "confirmPasswordError"
+        );
+        let phoneError = document.getElementById("phoneError");
+        let addressError = document.getElementById("addressError");
+        let countryError = document.getElementById("countryError");
+
+        firstNameError.innerHTML =
+          lastNameError.innerHTML =
+          emailError.innerHTML =
+          passwordError.innerHTML =
+          confirmPasswordError.innerHTML =
+          phoneError.innerHTML =
+          addressError.innerHTML =
+          countryError.innerHTML =
+            "";
+
+        // Name Validation
+        if (firstName.value.trim() === "") {
+          firstNameError.innerHTML = "First Name is required!";
+          valid = false;
+        }
+        if (lastName.value.trim() === "") {
+          lastNameError.innerHTML = "Last Name is required!";
+          valid = false;
+        }
+
+        // Email Validation
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email.value.trim())) {
+          emailError.innerHTML = "Invalid email format!";
+          valid = false;
+        }
+
+        // Password Validation
+        if (password.value.length < 6) {
+          passwordError.innerHTML = "Password must be at least 6 characters!";
+          valid = false;
+        }
+        if (password.value !== confirmPassword.value) {
+          confirmPasswordError.innerHTML = "Passwords do not match!";
+          valid = false;
+        }
+
+        // Phone Number Validation
+        let phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone.value.trim())) {
+          phoneError.innerHTML = "Invalid phone number!";
+          valid = false;
+        }
+
+        // Address Validation
+        if (address.value.trim() === "") {
+          addressError.innerHTML = "Address is required!";
+          valid = false;
+        }
+
+        // Country Validation
+        if (country.value === "default") {
+          countryError.innerHTML = "Please select a country!";
+          valid = false;
+        }
+
+        return valid;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Registration Form</h2>
+    <form onsubmit="return validateForm()">
+      <label>First Name:</label>
+      <input type="text" id="firstName" />
+      <span class="error" id="firstNameError"></span><br />
+
+      <label>Last Name:</label>
+      <input type="text" id="lastName" />
+      <span class="error" id="lastNameError"></span><br />
+
+      <label>Email:</label>
+      <input type="text" id="email" />
+      <span class="error" id="emailError"></span><br />
+
+      <label>Password:</label>
+      <input type="password" id="password" />
+      <span class="error" id="passwordError"></span><br />
+
+      <label>Re-enter Password:</label>
+      <input type="password" id="confirmPassword" />
+      <span class="error" id="confirmPasswordError"></span><br />
+
+      <label>Phone Number:</label>
+      <input type="text" id="phone" />
+      <span class="error" id="phoneError"></span><br />
+
+      <label>Address:</label>
+      <textarea id="address"></textarea>
+      <span class="error" id="addressError"></span><br />
+
+      <label>Country:</label>
+      <select id="country">
+        <option value="default">Choose your country</option>
+        <option value="USA">USA</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+        <option value="Australia">Australia</option>
+      </select>
+      <span class="error" id="countryError"></span><br />
+
+      <button type="submit" class="submit-btn">REGISTER</button>
+    </form>
+  </body>
+</html>

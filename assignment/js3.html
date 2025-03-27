@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Multiply and Divide</title>
+    <script>
+      function calculate(operation) {
+        var num1 = parseFloat(document.getElementById("num1").value);
+        var num2 = parseFloat(document.getElementById("num2").value);
+        var result;
+
+        if (isNaN(num1) || isNaN(num2)) {
+          result = "Please enter valid numbers!";
+        } else {
+          if (operation === "multiply") {
+            result = num1 * num2;
+          } else if (operation === "divide") {
+            if (num2 === 0) {
+              result = "Cannot divide by zero!";
+            } else {
+              result = num1 / num2;
+            }
+          }
+        }
+
+        document.getElementById("result").innerHTML =
+          "The Result Is: " + result;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Multiplication and Division</h2>
+    <label>1st Number: </label>
+    <input type="text" id="num1" /><br /><br />
+    <label>2nd Number: </label>
+    <input type="text" id="num2" /><br /><br />
+    <button onclick="calculate('multiply')">Multiply</button>
+    <button onclick="calculate('divide')">Divide</button>
+    <p id="result">The Result Is:</p>
+  </body>
+</html>

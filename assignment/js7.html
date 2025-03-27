@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Train Animation</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      #train {
+        position: absolute;
+        left: 0;
+        top: 100px;
+        width: 200px;
+      }
+      #controls {
+        margin-top: 20px;
+      }
+    </style>
+    <script>
+      var train,
+        position = 0,
+        interval;
+
+      function startAnimation() {
+        train = document.getElementById("train");
+        clearInterval(interval); // Clear existing intervals
+        interval = setInterval(moveTrain, 20);
+      }
+
+      function moveTrain() {
+        if (position < window.innerWidth - 200) {
+          position += 5;
+          train.style.left = position + "px";
+        } else {
+          clearInterval(interval); // Stop animation when it reaches the end
+        }
+      }
+
+      function stopAnimation() {
+        clearInterval(interval);
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Click the following buttons to handle animation</h2>
+    <img
+      id="train"
+      src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Steam_train.gif"
+      alt="Train"
+    />
+
+    <div id="controls">
+      <button onclick="startAnimation()">Start</button>
+      <button onclick="stopAnimation()">Stop</button>
+    </div>
+  </body>
+</html>

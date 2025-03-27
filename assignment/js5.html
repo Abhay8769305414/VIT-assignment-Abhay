@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Validation</title>
+    <style>
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+      input,
+      textarea {
+        border: 2px solid black;
+        padding: 5px;
+        margin-bottom: 5px;
+      }
+      .error-border {
+        border-color: red;
+      }
+    </style>
+    <script>
+      function validateForm() {
+        let valid = true;
+
+        // Get form elements
+        let name = document.getElementById("name");
+        let email = document.getElementById("email");
+        let website = document.getElementById("website");
+        let message = document.getElementById("message");
+
+        // Get error span elements
+        let nameError = document.getElementById("nameError");
+        let emailError = document.getElementById("emailError");
+        let websiteError = document.getElementById("websiteError");
+        let messageError = document.getElementById("messageError");
+
+        // Reset error messages
+        nameError.innerHTML = "";
+        emailError.innerHTML = "";
+        websiteError.innerHTML = "";
+        messageError.innerHTML = "";
+
+        // Reset border colors
+        name.classList.remove("error-border");
+        email.classList.remove("error-border");
+        website.classList.remove("error-border");
+        message.classList.remove("error-border");
+
+        // Validate Name
+        if (name.value.trim() === "") {
+          nameError.innerHTML = "This field is required";
+          name.classList.add("error-border");
+          valid = false;
+        }
+
+        // Validate Email
+        let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (email.value.trim() === "") {
+          emailError.innerHTML = "A valid email address is required";
+          email.classList.add("error-border");
+          valid = false;
+        } else if (!emailPattern.test(email.value.trim())) {
+          emailError.innerHTML = "Invalid email format";
+          email.classList.add("error-border");
+          valid = false;
+        }
+
+        // Validate Website
+        let urlPattern =
+          /^(https?:\/\/)?([\w\-]+)\.([a-z]{2,6})([\/\w .-]*)*\/?$/;
+        if (website.value.trim() === "") {
+          websiteError.innerHTML = "A valid URL is required";
+          website.classList.add("error-border");
+          valid = false;
+        } else if (!urlPattern.test(website.value.trim())) {
+          websiteError.innerHTML = "Invalid URL format";
+          website.classList.add("error-border");
+          valid = false;
+        }
+
+        // Validate Message
+        if (message.value.trim() === "") {
+          messageError.innerHTML = "This field is required";
+          message.classList.add("error-border");
+          valid = false;
+        }
+
+        return valid; // If false, form will not be submitted
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Form Validation</h2>
+    <form onsubmit="return validateForm()">
+      <label>Name:</label>
+      <input type="text" id="name" />
+      <span class="error" id="nameError"></span><br />
+
+      <label>Email:</label>
+      <input type="text" id="email" />
+      <span class="error" id="emailError"></span><br />
+
+      <label>Website </label>
+    </form>
+  </body>
+</html>
